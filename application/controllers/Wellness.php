@@ -282,7 +282,19 @@ class Wellness extends CI_Controller {
    }
 
    function contactus(){
+        $config = array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'mail.auraveda.in',
+        'smtp_ssl'=>none,
+        'smtp_port' => 25,
+        'smtp_user' => 'test@auraveda.in',
+        'smtp_pass' => 'pass!@#456',
+        'mailtype'  => 'html'
+        );
+        
+        $this->email->initialize($config);
         $this->email->set_mailtype("html");
+        $this->email->set_newline("\r\n");
 
         $msg = "Enquiry below:<br /><br />";
         $msg = $msg . $this->input->post('txtmessage');
@@ -296,7 +308,8 @@ class Wellness extends CI_Controller {
         $msg = $msg . $this->input->post('txtname');
 
         $to_ = 'info@auraveda.in,info.auraveda@gmail.com';
-        $from_ = $this->input->post('txtemail');
+        //$from_ = $this->input->post('txtemail');
+        $from_ = 'test@auraveda.in';
         $name_ = 'Enquiry...';
 
         $this->email->from($from_, $name_);
@@ -316,7 +329,19 @@ class Wellness extends CI_Controller {
    }
 
    function book_online(){
+    $config = array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'mail.auraveda.in',
+        'smtp_ssl'=>none,
+        'smtp_port' => 25,
+        'smtp_user' => 'test@auraveda.in',
+        'smtp_pass' => 'pass!@#456',
+        'mailtype'  => 'html'
+        );
+        
+        $this->email->initialize($config);
         $this->email->set_mailtype("html");
+        $this->email->set_newline("\r\n"); 
 
         $msg = "<h2>Online Booking below:</h2><br />";
         $msg = $msg . "<b>Date of Appointment needed</b>: " . date('d-m-Y', strtotime($this->input->post('txtAppointmentDate'))) . "<br /><br />";
@@ -339,7 +364,8 @@ class Wellness extends CI_Controller {
 
         $to_ = 'info.auraveda@gmail.com';
         //$to_ = 'navtewari@gmail.com';
-        $from_ = $this->input->post('txtClientEmail');
+        //$from_ = $this->input->post('txtClientEmail');
+        $from_ = 'test@auraveda.in';
         $name_ = 'Online Booking...';
 
         $this->email->from($from_, $name_);
