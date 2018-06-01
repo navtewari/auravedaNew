@@ -399,8 +399,20 @@ class Wellness extends CI_Controller {
         $this->load->view('templates/footer');
    }
 
-   function gift_a_card(){
+   function gift_a_card(){	   
+       $config = array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'mail.auraveda.in',
+        'smtp_ssl'=>none,
+        'smtp_port' => 25,
+        'smtp_user' => 'test@auraveda.in',
+        'smtp_pass' => 'pass!@#456',
+        'mailtype'  => 'html'
+        );
+        
+        $this->email->initialize($config);
         $this->email->set_mailtype("html");
+        $this->email->set_newline("\r\n"); 
 
         $msg = "<h2>Gift Cards for your loved ones:</h2><br />";
 
@@ -421,7 +433,8 @@ class Wellness extends CI_Controller {
         $msg = $msg . $this->input->post('txtClientMobile');
 
         $to_ = 'info.auraveda@gmail.com';
-        $from_ = $this->input->post('txtClientEmail');
+        //$from_ = $this->input->post('txtClientEmail');
+		$from_ = 'test@auraveda.in';
         $name_ = 'Gifting Card...';
 
         $this->email->from($from_, $name_);
@@ -455,7 +468,19 @@ class Wellness extends CI_Controller {
                 $path_ = 'x';
             }
 
+        $config = array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'mail.auraveda.in',
+        'smtp_ssl'=>none,
+        'smtp_port' => 25,
+        'smtp_user' => 'test@auraveda.in',
+        'smtp_pass' => 'pass!@#456',
+        'mailtype'  => 'html'
+        );
+        
+        $this->email->initialize($config);
         $this->email->set_mailtype("html");
+        $this->email->set_newline("\r\n"); 
 
         $msg = "<h2>Post Application below:</h2><br />";
         $msg = $msg . "<b>Post Applied for</b>: " . $this->input->post('txtPostAppliedFor') . "<br /><br />";
@@ -478,7 +503,8 @@ class Wellness extends CI_Controller {
 
         $to_ = 'info.auraveda@gmail.com';
         //$to_ = 'nitin.d12@gmail.com';
-        $from_ = $this->input->post('txtClientEmail');
+        //$from_ = $this->input->post('txtClientEmail');
+		$from_ = 'test@auraveda.in';
         $name_ = 'Post Application...';
 
         $this->email->from($from_, $name_);
@@ -497,8 +523,21 @@ class Wellness extends CI_Controller {
    }
    
    function newsletter(){
-        $page = $this->input->post('page');
-       $this->email->set_mailtype("html");
+	   $config = array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'mail.auraveda.in',
+        'smtp_ssl'=>none,
+        'smtp_port' => 25,
+        'smtp_user' => 'test@auraveda.in',
+        'smtp_pass' => 'pass!@#456',
+        'mailtype'  => 'html'
+        );
+        
+        $this->email->initialize($config);
+        $this->email->set_mailtype("html");
+        $this->email->set_newline("\r\n"); 
+		
+        $page = $this->input->post('page');       
 
         $msg = "Newsletter Subscription:<br /><br />";
         
@@ -511,7 +550,8 @@ class Wellness extends CI_Controller {
         $msg = $msg . $this->input->post('txtEmail');
 
         $to_ = 'info@auraveda.in,info.auraveda@gmail.com';
-        $from_ = $this->input->post('txtEmail');
+        //$from_ = $this->input->post('txtEmail');
+		$from_ = 'test@auraveda.in';
         $name_ = 'Newsletter Subscription';
 
         $this->email->from($from_, $name_);
